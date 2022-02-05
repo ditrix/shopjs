@@ -1,0 +1,9 @@
+npm init -y
+npm install express pg pg-hstore sequelize cors dotenv
+express - сервер 
+sequelize - библ модель-бд
+
+npm install nodemon --save-dev
+
+в работе
+npm run start-dev
