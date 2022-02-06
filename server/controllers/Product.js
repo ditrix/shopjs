@@ -56,18 +56,63 @@ class Product {
 
     }
 
-    async update(req, res) {
+    async update(req, res, next) {
 
-        // const product = await ProductMapping.findByPk(1)
-        // const name  = 'altimetr'
-        // const price = '10'
-        // await product.update({name,price})
+        try {
 
-        res.status(200).send('Обновление товара')
+            if(!req.params.id){
+                 throw new Error('no request parameter id')
+            }
+
+        
+            const product = await ProductMapping.findByPk(req.params.id)
+            if(!product){
+                 throw new Error('product not found')
+             }
+
+
+
+
+            const name  =  req.body.name ? req.body.name : product.name
+            const price =  req.body.price ? req.body.price: product.price
+
+
+             await product.update({name,price})
+
+             res.json(product)
+
+        } catch(e) {
+
+            next(AppError.badRequest(e.message))
+
+        }
+
+
     }
 
     async delete(req, res) {
-        res.status(200).send('Удаление товара')
+        try {
+
+            if(!req.params.id){
+                 throw new Error('no request parameter id')
+            }
+
+        
+            const product = await ProductMapping.findByPk(req.params.id)
+            if(!product){
+                 throw new Error('product not found')
+             }
+
+             product.destroy()
+
+             res.json(product)
+
+        } catch(e) {
+
+            next(AppError.badRequest(e.message))
+
+        }         
+
     }
 }
 
