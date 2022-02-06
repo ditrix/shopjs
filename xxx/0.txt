@@ -2,8 +2,12 @@ npm init -y
 npm install express pg pg-hstore sequelize cors dotenv
 express - сервер 
 sequelize - библ модель-бд
+cors - фикс корс ограничения (нельзя отправлять js запросы в рамк один домен - разные порты)
 
 npm install nodemon --save-dev
 
 в работе
 npm run start-dev
+
+/models/mappgin.js  - описания данных
+
