@@ -44,12 +44,15 @@ class Product {
 
         try {
 
+            console.log('req.body: ', req.body)
+            // console.log('req.files: ', req.files)
+
             const {name, price, image = '' } = req.body;
             const product = await ProductMapping.create({name, price, image})
             res.json(product)
 
         } catch(e) {
-
+            console.log(e.message)
             next(AppError.badRequest(e.message))            
 
         }
